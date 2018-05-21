@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-// import ResizeObserver from "resize-observer-polyfill";
+//import App from "./App";
+import App from "./GridApp"; /*TESTA MIG!*/
+import ResizeObserver from "resize-observer-polyfill";
+import throttle from "lodash.throttle";
 
 const render = (width, height) => {
   ReactDOM.render(
@@ -11,19 +13,20 @@ const render = (width, height) => {
   );
 };
 
-// const ro = new ResizeObserver((entries, observer) => {
-//   for (const entry of entries) {
-//     const { width, height } = entry.contentRect;
+const throttledRender = throttle(render, 50);
 
-//     render(width, height);
-//   }
-// });
+const ro = new ResizeObserver((entries, observer) => {
+  for (const entry of entries) {
+    const { width, height } = entry.contentRect;
 
-// ro.observe(document.body);
-
-window.addEventListener("resize", () => {
-	render(window.innerWidth, window.innerHeight);
+    throttledRender(width, height);
+  }
 });
 
-render(window.innerWidth, window.innerHeight);
+ro.observe(document.body);
 
+// window.addEventListener("resize", () => {
+// 	render(window.innerWidth, window.innerHeight);
+// });
+
+render(window.innerWidth, window.innerHeight);
