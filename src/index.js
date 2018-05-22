@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-//import App from "./App";
-import App from "./GridApp"; /*TESTA MIG!*/
+import App from "./App";
 import ResizeObserver from "resize-observer-polyfill";
 import throttle from "lodash.throttle";
 
