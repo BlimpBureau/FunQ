@@ -105,7 +105,7 @@ class App extends Component {
     return (
       <div style={containerStyle}>
         {this.state.currentView !== VIEWS.NAV && Close}
-        <View width={this.props.width} height={this.props.height} actions={this.actions} />
+        <View width={this.props.width - 2 * SPACING} height={this.props.height - 2 * SPACING} actions={this.actions} />
       </div>
     );
   }
