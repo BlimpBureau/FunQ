@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Module from "./Module";
 import SimpleView from "./SimpleView";
 import GridView from "./GridView"
 import CloseButton from "./CloseButton";
