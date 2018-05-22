@@ -20,10 +20,12 @@ const App = ({width, height}) => {
     height: 100 * moduleHeight/height + "%",
   };
 
+  let depth = width > 1280 ? 4 : width > 768 ? 3 : 2;
+
   return (
     <div style={containerStyle}>
     	<div style={moduleContainerStyle}>
-        	<Grid width={moduleWidth} height={moduleHeight} depth={3}/>
+        	<Grid width={moduleWidth} height={moduleHeight} depth={depth}/>
         </div>
     </div>
   );
