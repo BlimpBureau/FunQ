@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {state, actions} from "./Store";
 import "./index.css";
 import App from "./App";
-import ResizeObserver from "resize-observer-polyfill";
+// import ResizeObserver from "resize-observer-polyfill";
 import throttle from "lodash.throttle";
 
 const render = (s = state.getData(), x = actions, w = window.innerWidth, h = window.innerHeight) => {
@@ -13,19 +13,17 @@ const render = (s = state.getData(), x = actions, w = window.innerWidth, h = win
   );
 };
 
-const throttledRender = throttle(render, 50);
+const throttledRender = throttle(render, 1000/60); // 60 FPS
+state.connect(throttledRender);
+window.addEventListener("resize", () => { throttledRender() } );
 
-const ro = new ResizeObserver((entries, observer) => {
-  for (const entry of entries) {
-    const { width, height } = entry.contentRect;
+// const ro = new ResizeObserver((entries, observer) => {
+//   for (const entry of entries) {
+//     const { width, height } = entry.contentRect;
 
-    throttledRender(state.getData(), actions, width, height);
-  }	
-});
-
-ro.observe(document.body);
-state.connect(render);
-
-// window.addEventListener("resize", () => {
-// 	render(state.getData(), actions, window.innerWidth, window.innerHeight);
+//     throttledRender(state.getData(), actions, width, height);
+//   }	
 // });
+
+// ro.observe(document.body);
+
